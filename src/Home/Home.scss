@@ -4,4 +4,36 @@
     gap: 20px;
     width: 100%;
     max-width: 800px;
+    margin: 0 auto;
 }
+
+.post-item {
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  
+    h2 {
+      margin-top: 0;
+    }
+  
+    p {
+      margin-bottom: 10px;
+    }
+  
+    .show-more {
+      color: #007bff;
+      cursor: pointer;
+    }
+  
+    .author {
+      color: #555;
+      font-size: 0.9rem;
+    }
+
+    .comments-count {
+        color: #555;
+        font-size: 0.9rem;
+    }
+  }

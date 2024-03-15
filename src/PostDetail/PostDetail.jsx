@@ -18,8 +18,8 @@ function PostDetail({ postId, onBack }) {
   }, [postId]);
 
   return (
-    <div>
-      <button onClick={onBack}>Back</button>
+    <div className="post-detail">
+      <button className="back-button" onClick={onBack}>Back</button>
       {post && (
         <div>
           <h1>{post.title}</h1>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Home.scss';
 
 function Home({ onSelectPost }) {
   const [posts, setPosts] = useState([]);
@@ -37,12 +38,15 @@ function Home({ onSelectPost }) {
   }
 
   return (
-    <div>
+    <div className="post-list">
       {posts.map((post) => (
-        <div key={post.id} onClick={() => onSelectPost(post.id)}>
+        <div className="post-item" key={post.id} onClick={() => onSelectPost(post.id)}>
           <h2>{post.title}</h2>
-          <p>{post.body.substring(0, 100)}...</p>
-          <p>Author: {getAuthorName(post.userId)}</p>
+          <p className="show-more"> {post.body.substring(0, 100)}...</p>
+          <div className="info">
+            <p className="author"> Author: {getAuthorName(post.userId)}</p>
+            <p className="comments-count">Comments {getCommentsCount(post.id)}</p>
+          </div>
         </div>
       ))}
     </div>
