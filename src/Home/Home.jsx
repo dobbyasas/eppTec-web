@@ -6,26 +6,27 @@ function Home({ onSelectPost }) {
   const [posts, setPosts] = useState([]);
   const [users, setUsers] = useState([]);
   const [comments, setComments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchPosts() {
+    async function fetchData() {
+      setIsLoading(true);
+      try {
         const postsResponse = await axios.get('https://jsonplaceholder.typicode.com/posts');
-        setPosts(postsResponse.data);
-    }
-
-    async function fetchUsers() {
         const usersResponse = await axios.get('https://jsonplaceholder.typicode.com/users');
-        setUsers(usersResponse.data);
-    }
-
-    async function fetchComments() {
         const commentsResponse = await axios.get('https://jsonplaceholder.typicode.com/comments');
+        
+        setPosts(postsResponse.data);
+        setUsers(usersResponse.data);
         setComments(commentsResponse.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
 
-    fetchPosts();
-    fetchUsers();
-    fetchComments();
+    fetchData();
   }, []);
 
   const getAuthorName = (userId) => {
@@ -35,6 +36,10 @@ function Home({ onSelectPost }) {
 
   const getCommentsCount = (postId) => {
     return comments.filter(comments => comments.postId === postId).length;
+  }
+
+  if (isLoading) {
+    return <div className="loading">Loading...</div>;
   }
 
   return (
