@@ -7,7 +7,7 @@ function PostDetail({ postId, onBack, show }) {
   const [author, setAuthor] = useState(null);
   const [comments, setComments] = useState([]);
   
-  const detailClass = show ? 'post-detail enter' : 'post-detail exit';
+  const detailClass = show ? 'post-detail-container enter' : 'post-detail-container exit';
 
   useEffect(() => {
     async function fetchData() {
