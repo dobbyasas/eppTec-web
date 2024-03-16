@@ -5,13 +5,24 @@ import PostDetail from './PostDetail/PostDetail'
 
 function App() {
   const [selectedPostId, setSelectedPostId] = useState(null);
+  const [showDetail, setShowDetail] = useState(false);
+
+  const handleSelectPost = (postId) => {
+    setSelectedPostId(postId);
+    setShowDetail(true);
+  };
+
+  const handleBack = () => {
+    setShowDetail(false);
+    setTimeout(() => setSelectedPostId(null), 300);
+  };
 
   return (
-    <div className="app-container">
-      {selectedPostId ? (
-        <PostDetail postId={selectedPostId} onBack={() => setSelectedPostId(null)} />
+    <div>
+      {!selectedPostId ? (
+        <Home onSelectPost={handleSelectPost} />
       ) : (
-        <Home onSelectPost={setSelectedPostId} />
+        <PostDetail postId={selectedPostId} onBack={handleBack} show={showDetail} />
       )}
     </div>
   );

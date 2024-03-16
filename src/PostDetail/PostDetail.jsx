@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './PostDetail.scss';
 
-function PostDetail({ postId, onBack }) {
+function PostDetail({ postId, onBack, show }) {
   const [post, setPost] = useState(null);
   const [author, setAuthor] = useState(null);
   const [comments, setComments] = useState([]);
+  
+  const detailClass = show ? 'post-detail enter' : 'post-detail exit';
 
   useEffect(() => {
     async function fetchData() {
@@ -30,26 +32,28 @@ function PostDetail({ postId, onBack }) {
   }, [postId]);
 
   return (
-    <div className="post-detail">
-      <button className="back-button" onClick={onBack}>Back to main page</button>
-      {post && author && (
-        <>
-          <h1>{post.title}</h1>
-          <p className="author-name">{author.name}</p>
-          <div className="post-body">{post.body}</div>
-          <br />
-          <h3>Comments</h3>
-          <div className="comments-section">
-            {comments.map((comment) => (
-              <div className="comment" key={comment.id}>
-                <h4>{comment.name}</h4>
-                <p className="author-email">{comment.email}</p>
-                <p className="comment-body">{comment.body}</p>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
+    <div className={detailClass}>
+      <div className="post-detail">
+        <button className="back-button" onClick={onBack}>Back to main page</button>
+        {post && author && (
+          <>
+            <h1>{post.title}</h1>
+            <p className="author-name">{author.name}</p>
+            <div className="post-body">{post.body}</div>
+            <br />
+            <h3>Comments</h3>
+            <div className="comments-section">
+              {comments.map((comment) => (
+                <div className="comment" key={comment.id}>
+                  <h4>{comment.name}</h4>
+                  <p className="author-email">{comment.email}</p>
+                  <p className="comment-body">{comment.body}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }
