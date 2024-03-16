@@ -40,12 +40,15 @@ function Home({ onSelectPost }) {
   return (
     <div className="post-list">
       {posts.map((post) => (
-        <div className="post-item" key={post.id} onClick={() => onSelectPost(post.id)}>
+        <div className="post-item" key={post.id}>
           <h2>{post.title}</h2>
-          <p className="show-more"> {post.body.substring(0, 100)}...</p>
+          <div className="author">
+            <p>{getAuthorName(post.userId)}</p>
+          </div>
+          <p className="post-excerpt">{post.body.substring(0, 100)}...</p>
           <div className="info">
-            <p className="author"> Author: {getAuthorName(post.userId)}</p>
-            <p className="comments-count">Comments {getCommentsCount(post.id)}</p>
+            <button className="show-more" onClick={() => onSelectPost(post.id)}>Show more...</button>
+            <span className="comments-count">Comments: {getCommentsCount(post.id)}</span>
           </div>
         </div>
       ))}
